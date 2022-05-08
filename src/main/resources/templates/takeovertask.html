@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>引継一覧表　仮</title>
+</head>
+<body>
+<!-- 引継を一覧形式で表示-->
+<table border="1">
+  <tr>
+    <th>引継ID</th>
+    <th>タグ</th>
+    <th>関連チケットID</th>
+    <th>引継内容</th>
+    <th>タイトル</th>
+    <th>引継開始日付</th>
+    <th>引継終了日付</th>
+    <th>重要度</th>
+    <th>作成日</th>
+    <th>最終更新日</th>
+    <th>責任者ID</th>
+    <th>作成者ID</th>
+    <th>担当者ID</th>
+    <th>完了確認</th>  
+  </tr>
+  <tr>
+    <th><input type ="text" name = "id"></th>
+    <th>タグ</th>
+    <th>関連チケットID</th>
+    <th>引継内容</th>
+    <th>タイトル</th>
+    <th>引継開始日付</th>
+    <th>引継終了日付</th>
+    <th>重要度</th>
+    <th>作成日</th>
+    <th>最終更新日</th>
+    <th>責任者ID</th>
+    <th>作成者ID</th>
+    <th>担当者ID</th>
+    <th>完了確認</th> 
+  </tr>
+		
+</table>
+
+	<form th:action="@{/}"method = "get">
+		<button>ログイン画面に戻る</button>
+	</form>	
+	
+	<button>登録完了</button>
+
+</body>
+</html>
