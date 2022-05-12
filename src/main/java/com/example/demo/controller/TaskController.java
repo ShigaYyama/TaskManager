@@ -8,20 +8,24 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.model.Knowledge;
 import com.example.demo.model.TakeOverTask;
 import com.example.demo.model.User;
+import com.example.demo.repository.KnowledgeRepository;
 import com.example.demo.repository.TaskRepository;
+import com.example.demo.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
 public class TaskController {
-   
-	private final TaskRepository repository;
+
+	private final UserRepository userRepository;
+	private final TaskRepository taskRepository;
+	private final KnowledgeRepository knowledgeRepository;
 	
 //	@Autowired
 //	public TaskController(TaskRepository repository) {
@@ -32,24 +36,60 @@ public class TaskController {
     public String index(Model model) {
         return "login";
 	}
-	
-	@GetMapping("/test")
-	public String task(Model model) {
-		return "takeovertask";
-	}
-	
-	@GetMapping("/error")
-	public String error(Model model) {
-		return "error";
-	}
-	
+
 	@PostMapping("/")
 	public String confirm(@Validated @ModelAttribute User user, BindingResult result) {
 		if(result.hasErrors()){
 			return "error";
 		}
 		return "login";
+	}	
+
+	@GetMapping("/userconfirm")
+	public String user(Model model) {
+		List<User>userLoad = getUserAll();
+		model.addAttribute("userLoad", userLoad);
+		return "login";
+	}	
+	
+	@GetMapping("/error")
+	public String error(Model model) {
+		return "error";
+	}	
+	
+	@GetMapping("/takeovertask")
+	public String task(Model model) {
+		List<TakeOverTask>taskLoad = getTaskAll();
+		model.addAttribute("taskLoad", taskLoad);
+		return "takeovertask";
 	}
+	
+	@GetMapping("/memo")
+    public String memo(Model model) {
+        return "writingmemo";
+	}
+
+    @PostMapping("/addmemo")
+    public String addComment(@Validated @ModelAttribute TakeOverTask task,
+            BindingResult result, Model model) {
+
+        model.addAttribute("findTask", taskRepository.findAll());
+        if (result.hasErrors()) {
+            return "error";
+        }
+        taskRepository.save(task);
+
+        return "redirect:/memo";
+    }		
+	
+	@GetMapping("/knowledge")
+    public String knowledge(Model model) {
+		List<Knowledge>knowledgeLoad = getKnowledgeAll();
+		model.addAttribute("knowledgeLoad", knowledgeLoad);
+        return "knowledge";
+	}
+
+
 	
 //	@GetMapping("/show")
 //	public String showList(Model model) {
@@ -60,21 +100,25 @@ public class TaskController {
 //		return "takeovertask";
 //	}
 //	
-//	@PostMapping("/login")
-//	public String login(@ModelAttribute TakeOverTask takeovertask) {
-//		return "takeovertask";
-//	}
-	
-	@GetMapping
-	public List<TakeOverTask> getAll() {
+
+	private List<User> getUserAll() {
 	    //全件取得
-	    return repository.findAll();
+	    return userRepository.findAll();
+	}    
+    
+	private List<TakeOverTask> getTaskAll() {
+	    //全件取得
+	    return taskRepository.findAll();
 	}
 	
-    @GetMapping("{id}")
-	public TakeOverTask getById(@PathVariable("id") Integer takeOverId) {
+	private List<Knowledge> getKnowledgeAll() {
+	    //全件取得
+	    return knowledgeRepository.findAll();
+	}
+	
+	private TakeOverTask getById(Integer takeOverId) {
 	    //IDで検索
-	    return repository.findById(takeOverId).orElseThrow();
+	    return taskRepository.findById(takeOverId).orElseThrow();
 	}	
 	
 }

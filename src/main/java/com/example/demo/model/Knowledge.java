@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,12 +42,12 @@ public class Knowledge {
     @NotBlank
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
-    private long createDate;
+    private Date createDate;
     
     @NotBlank
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
-    private long latestDate;
+    private Date latestUpdateDate;
  
     @Size(max = 1)   
     private String importance;    
