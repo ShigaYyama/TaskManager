@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -45,20 +47,20 @@ public class TaskController {
 		return "login";
 	}	
 
-	@GetMapping("/userconfirm")
+	@GetMapping("/users")
 	public String user(Model model) {
 		List<User>userLoad = getUserAll();
 		model.addAttribute("userLoad", userLoad);
-		return "login";
-	}	
+		return "users";
+	}		
 	
 	@GetMapping("/error")
 	public String error(Model model) {
 		return "error";
 	}	
 	
-	@GetMapping("/takeovertask")
-	public String task(Model model) {
+	@GetMapping("/selectAllTask")
+	public String selectAllTask(Model model) {
 		List<TakeOverTask>taskLoad = getTaskAll();
 		model.addAttribute("taskLoad", taskLoad);
 		return "takeovertask";
@@ -66,22 +68,35 @@ public class TaskController {
 	
 	@GetMapping("/memo")
     public String memo(Model model) {
-        return "writingmemo";
+		model.addAttribute("takeOverTask", new TakeOverTask());
+		return "writingmemo";
 	}
 
     @PostMapping("/addmemo")
-    public String addComment(@Validated @ModelAttribute TakeOverTask task,
+    public String addComment(@Validated @ModelAttribute TakeOverTask takeOverTask,
             BindingResult result, Model model) {
+    	
+    	Date date= new Date();
+        long time = date.getTime();
+        Timestamp ts = new Timestamp(time);
 
+		takeOverTask.setCreateDate(ts);
+		takeOverTask.setLatestUpdateDate(ts);
+    		
         model.addAttribute("findTask", taskRepository.findAll());
         if (result.hasErrors()) {
             return "error";
         }
-        taskRepository.save(task);
+        taskRepository.save(takeOverTask);
 
         return "redirect:/memo";
     }		
-	
+
+	@GetMapping("/taskconfirm")
+    public String taskconfirm(Model model) {
+        return "taskconfirm";
+	}    
+    
 	@GetMapping("/knowledge")
     public String knowledge(Model model) {
 		List<Knowledge>knowledgeLoad = getKnowledgeAll();
@@ -89,6 +104,10 @@ public class TaskController {
         return "knowledge";
 	}
 
+	@GetMapping("/serchtask")
+    public String serchTask() {
+		return "serchtask";
+	}	
 
 	
 //	@GetMapping("/show")

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>ナレッジ一覧</title>
+</head>
+<body>
+
+<table border="1">
+  <tr>
+    <th>ナレッジID</th>
+    <th>タグ</th>
+    <th>関連チケットID</th>
+    <th>引継内容</th>
+    <th>タイトル</th>
+    <th>作成日</th>
+    <th>最終更新日</th>
+    <th>重要度</th>
+    <th>責任者ID</th>
+    <th>作成者ID</th>
+    <th>担当者ID</th>
+  </tr>
+	<tr th:each="knowledge : ${knowledgeLoad}">
+      <td th:text="${knowledge.knowledgeId}"></td>
+      <td th:text="${knowledge.tag}"></td>
+      <td th:text="${knowledge.relatedTicketId}"></td>
+      <td th:text="${knowledge.takeOverMemo}"></td>
+      <td th:text="${knowledge.title}"></td>
+      <td th:text="${knowledge.createDate}"></td>
+      <td th:text="${knowledge.latestUpdateDate}"></td>
+      <td th:text="${knowledge.importance}"></td>
+      <td th:text="${knowledge.assignerId}"></td>     
+      <td th:text="${knowledge.issuerId}"></td>
+      <td th:text="${knowledge.assigneeId}"></td>                            
+  </tr>		
+</table>
+
+	<form th:action="@{/selectAllTask}"method = "get">
+		<button>引継一覧</button>
+	</form>
+
+	<form th:action="@{/}"method = "get">
+		<button>ログイン画面に戻る</button>
+	</form>	
+
+</body>
+</html>

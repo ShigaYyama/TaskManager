@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>引継記入</title>
+</head>
+<body>
+  <form th:action="@{/addmemo}"  th:object="${takeOverTask}" method="post">
+    <label for="title">タイトル:</label>
+    <input type="text" th:field="*{title}">  
+    <br>
+    <label for="tag">タグ:</label>
+    <input type="text" th:field="*{tag}">
+    <br>    
+    <label for="takeOverMemo">引継メモ:</label>
+    <input type="text" th:field="*{takeOverMemo}">
+    <br>
+    <label for="importance">重要度:</label>
+    <input type="text" th:field="*{importance}">
+    <br>
+    <label for="relatedTicketId">関連チケットID:</label>
+    <input type="text" th:field="*{relatedTicketId}">
+    <br>
+<!--     <label for="assignerId">責任者ID:</label>
+    <input type="text" th:field="*{assignerId}">
+    <br>
+    <label for="issuerId">作成者ID:</label>
+    <input type="text" th:field="*{issuerId}">
+    <br>
+    <label for="assigneeId">担当者ID:</label>
+    <input type="text" th:field="*{assigneeId}">
+    <br>
+    <label for="confirmation">完了確認:</label>
+    <input type="text" th:field="*{confirmation}">
+    <br>
+    <label for="startDate">引継開始日:</label>
+    <input type="text" th:field="*{startDate}">
+    <br>    
+    <label for="endDate">引継終了日:</label>
+    <input type="text" th:field="*{endDate}">
+    <br> -->    
+    <button>登録</button>
+  </form>		
+
+	<form th:action="@{/selectAllTask}"method = "get">
+		<button>引継一覧</button>
+	</form>
+		
+	<form th:action="@{/}"method = "get">
+		<button>ログイン画面に戻る</button>
+	</form>	
+</body>
+</html>

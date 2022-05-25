@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,8 +29,8 @@ public class TakeOverTask {
     @Size(max = 10)
     private String tag;
     
-    @Size(max = 10)
-    private Long relatedTicketId;
+    @Max(10)
+    private Integer relatedTicketId;
     
     @NotBlank
     private String takeOverMemo;
@@ -49,27 +50,25 @@ public class TakeOverTask {
     @Size(max = 1)   
     private String importance;
     
-    @NotBlank
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
     private Date createDate;
     
-    @NotBlank
     @NotNull
     @DateTimeFormat(iso = ISO.DATE)
     private Date latestUpdateDate;
     
-    @Size(max = 5)
-    private Long assignerId;
+    @Max(5)
+    private Integer assignerId;
     
-    @Size(max = 5)
-    private Long issuerId;
+    @Max(5)
+    private Integer issuerId;
     
-    @Size(max = 5)
-    private Long assigneeId;
+    @Max(5)
+    private Integer assigneeId;
     
-    @Size(max = 1)
-    private Long confirmation;
+    @Size(max = 1) 
+    private String confirmation;
     
     
 }
