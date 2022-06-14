@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>引継確認</title>
+</head>
+<body>
+
+引継内容
+
+
+	<form th:action="@{/memo}"method = "get">
+		<button>登録画面</button>
+	</form>	
+
+	<form th:action="@{/knowledge}"method = "get">
+		<button>ナレッジ一覧</button>
+	</form>	
+
+	<form th:action="@{/}"method = "get">
+		<button>ログイン画面に戻る</button>
+	</form>	
+
+</body>
+</html>

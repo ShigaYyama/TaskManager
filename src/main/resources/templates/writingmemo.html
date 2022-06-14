@@ -21,7 +21,7 @@
     <label for="relatedTicketId">関連チケットID:</label>
     <input type="text" th:field="*{relatedTicketId}">
     <br>
-<!--     <label for="assignerId">責任者ID:</label>
+	<label for="assignerId">責任者ID:</label>
     <input type="text" th:field="*{assignerId}">
     <br>
     <label for="issuerId">作成者ID:</label>
@@ -34,12 +34,12 @@
     <input type="text" th:field="*{confirmation}">
     <br>
     <label for="startDate">引継開始日:</label>
-    <input type="text" th:field="*{startDate}">
+    <input type="date" th:field="*{startDate}">
     <br>    
     <label for="endDate">引継終了日:</label>
-    <input type="text" th:field="*{endDate}">
-    <br> -->    
-    <button>登録</button>
+    <input type="date" th:field="*{endDate}">
+    <br>
+    <input type="submit" value="登録" class="btn">
   </form>		
 
 	<form th:action="@{/selectAllTask}"method = "get">

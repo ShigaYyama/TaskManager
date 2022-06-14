@@ -4,13 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +19,7 @@ import lombok.Setter;
 public class Knowledge {
 	
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private int knowledgeId;
     
@@ -29,8 +27,7 @@ public class Knowledge {
     @Size(max = 10)
     private String tag;
     
-    @Size(max = 5)
-    private Long relatedTicketId;
+    private Integer relatedTicketId;
     
     @NotBlank
     private String takeOverMemo;
@@ -39,26 +36,17 @@ public class Knowledge {
     @Size(max = 50)
     private String title;
 
-    @NotBlank
-    @NotNull
-    @DateTimeFormat(iso = ISO.DATE)
     private Date createDate;
     
-    @NotBlank
-    @NotNull
-    @DateTimeFormat(iso = ISO.DATE)
     private Date latestUpdateDate;
  
     @Size(max = 1)   
     private String importance;    
     
-    @Size(max = 5)
-    private Long assignerId;
+    private Integer assignerId;
     
-    @Size(max = 5)
-    private Long issuerId;
+    private Integer issuerId;
     
-    @Size(max = 5)
-    private Long assigneeId;
+    private Integer assigneeId;
 	
 }

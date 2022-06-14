@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>引継検索</title>
+</head>
+<body>
+<!-- 	<div th:fragment="search"> -->
+		 <form th:action="@{/searchbykeywords}"  th:object="${takeOverTask}"  method="get">
+			<table>
+				<tbody>
+					<tr>
+						<td><label for="takeOverMemo">引継メモ:</label>
+    					<input type="text" th:field="*{takeOverMemo}"></td>
+    					
+						<td><label for="relatedTicketId">関連チケットID:</label>
+    					<input type="text" th:field="*{relatedTicketId}"></td>
+ 					
+					</tr>
+					<tr>
+						<td><label for="issuerId">作成者ID:</label>
+    					<input type="text" th:field="*{issuerId}"></td>
+
+						<td><label for="createDate">作成年月日:</label>
+						<input type="date" name="startDate">～<input type="date" name="endDate"></td>
+					</tr>
+					
+
+				</tbody>
+				<tfoot align="center">
+					<tr><td colspan="4"><button type="submit">検索</button></td></tr>
+				</tfoot>
+			</table>
+
+		<th:block th:if="${searchTask != null }">		
+			<table border="1">	
+						
+			  <tr>
+			    <th>関連チケットID</th>
+			    <th>引継内容</th>
+			    <th>引継開始日付</th>
+			    <th>引継終了日付</th>
+			    <th>作成者ID</th>
+ 			 </tr>			  				
+			 <tr th:each="task : ${searchTask}">
+		      	<td th:text="${task.relatedTicketId}"></td>
+			    <td th:text="${task.takeOverMemo}"></td>
+			    <td th:text="${task.startDate}"></td>
+			    <td th:text="${task.endDate}"></td>  
+			    <td th:text="${task.issuerId}"></td>              
+ 			  </tr>
+				
+			</table>
+			
+		</th:block>
+		
+		</form>
+		<hr>
+<!-- 	</div> -->
+
+
+	<form th:action="@{/memo}"method = "get">
+		<button>登録画面</button>
+	</form>	
+
+	<form th:action="@{/knowledge}"method = "get">
+		<button>ナレッジ一覧</button>
+	</form>	
+
+
+	<form th:action="@{/}"method = "get">
+		<button>ログイン画面に戻る</button>
+	</form>	
+
+</body>
+</html>

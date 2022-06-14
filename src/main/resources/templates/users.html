@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>ユーザー一覧</title>
+</head>
+<body>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>名前</th>
+    <th>パスワード</th>
+    <th>最終ログイン日</th>
+    <th>責任者</th>
+  </tr>
+  
+	<tr th:each="user : ${userLoad}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.password}"></td>
+      <td th:text="${user.latestLoginDate}"></td>
+      <td th:text="${user.managerFlag}"></td>                
+  </tr>
+		
+</table>
+
+	<form th:action="@{/memo}"method = "get">
+		<button>登録画面</button>
+	</form>	
+
+	<form th:action="@{/knowledge}"method = "get">
+		<button>ナレッジ一覧</button>
+	</form>	
+
+	<form th:action="@{/serchtask}" method = "get">
+		<button>引継検索画面</button>
+	</form>
+	
+	<form th:action="@{/}"method = "get">
+		<button>ログイン画面に戻る</button>
+	</form>	
+
+</body>
+</html>
